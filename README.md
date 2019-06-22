@@ -17,7 +17,7 @@
 
 Alle i Bouvet som har interesse og lyst kan delta. Arrangementet annonseres i utgangspunktet kun internt, men ansatte oppfordres til å også invitere med seg venner og kjente i bransjen.
 
-Påmelding gjøre på [event.bouvet.no](https://event.bouvet.no/).
+Påmelding gjøres på [event.bouvet.no](https://event.bouvet.no/).
 
 ## Møtelogg
 
