@@ -1,8 +1,8 @@
 
 
-<div style="text-align:center">
+<p align="center">
     <img src="gfx/penguin.jpg" />
-</div>
+</p>
 
 <b>comp.lang.*</b> er et fagkveldkonsept i bouvet bergen hvor vi sammen utforsker ulike programmeringsspråk og relaterte teknologier. Vi møtes en gang i måneden med et nytt tema hver gang.
 
