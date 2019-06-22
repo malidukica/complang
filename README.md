@@ -19,7 +19,7 @@ Alle i Bouvet som har interesse og lyst kan delta. Arrangementet annonseres i ut
 
 ## Møtelogg
 
-- *2. juli 2019* - ***Go***
+- *1. juli 2019* - ***Go***
   
 ## Kontakt
 
