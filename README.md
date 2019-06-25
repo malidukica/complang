@@ -22,7 +22,7 @@ Påmelding gjøres på [event.bouvet.no](https://event.bouvet.no/).
 ## Møtelogg
 
 - *1. juli 2019* - ***Go***
-  
+- *6. august 2019* - ***Haskell***  
 ## Kontakt
 
 Lurer du på noe eller har lyst å bidra? Kontakt [Robert](https://bouvet.slack.com/team/UCPD6UPNC) eller [Torbjørn](https://bouvet.slack.com/team/UCMA2CT1C), eller gi lyd på den dedikerte [Slack-kanalen](https://bouvet.slack.com/messages/CKV4RNBHD).
