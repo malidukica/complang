@@ -5,6 +5,8 @@ Det enkleste er å gå til [Go Downloads](https://golang.org/dl/) og laste ned b
 
 ### Environment variabler
 
+[Sett GOPATH](https://github.com/golang/go/wiki/SettingGOPATH)
+
 ```bash
 # Go development
 export GOPATH="${HOME}/.go"
