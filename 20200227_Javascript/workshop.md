@@ -9,6 +9,9 @@ This workshop is heavily inspired and takes references and parts of implementati
 - [Classroom Coding With Professor Frisby](https://www.youtube.com/watch?v=h_tkIpwbsxY "Classroom Coding With Professor Frisby")
 - [Fantasy Land series by Tom Harding](http://www.tomharding.me/fantasy-land/ "Fantasy Land")
 
+To follow through this workshop, you need the latest Node.js installed.
+Clone this repository and run `npm install` in `202002227` folder.
+
 # ADT in Javascript
 
 Functional programming is all about functions (right?).
@@ -43,7 +46,7 @@ const Box = value => ({
 });
 ```
 
-We now need a way to operate on this value somehow - we can give add a function to this object, called, transformValue - where we can give it a function which will take this value and do something with it.
+We now need a way to operate on this value somehow - we can add a function to this object, called, transformValue - which in turn accepts a function which will take this value and do something with it.
 
 ```js
 const Box = value => ({
@@ -52,7 +55,7 @@ const Box = value => ({
 });
 ```
 
-If we return the result of this function, it is quite possible that we will lose the capability of chaining - that is why this operation should be _CLOSED_ - meaning _transformValue_ should return a new instance of the Box.
+If we return the result of the _f_ function, it is quite possible that we will lose the capability of chaining - that is why this operation should be _CLOSED_ - meaning _transformValue_ should return a new instance of the Box.
 
 ```js
 const Box = value => ({
@@ -61,7 +64,7 @@ const Box = value => ({
 });
 ```
 
-In the functional programming world, the transformValue function is called _map_. What happens if we try to refactor this function into using a box.
+In the functional programming world, the transformValue function is called _map_. What happens if we try to refactor _getAcronym_ into using a box.
 
 ```js
 const Box = value => ({
@@ -115,7 +118,7 @@ A Functor is, for our purposes, an _interface_ that a certain class / object imp
 
 This function will:
 
-1. accept a function
+1. accept a function as an argument
 2. apply the function to the value inside the functor/context
 3. return a new instance of the context with the result
 
@@ -149,7 +152,7 @@ _Functor_ interface has 2 laws:
 
 # Identity law
 
-Identity law states that if we have a value inside a functor context and if we _map_ it to an identity function (x => x), we're supposed to get the exact same value inside the same container.
+Identity law states that if we have a value inside a functor context and if we _map_ it to an identity function (a function that returns whatever it gets as argument `(x => x)`), we're supposed to get the exact same value inside the same container.
 
 ```
 Box(5) == Box(5).map(x => x)
@@ -157,15 +160,16 @@ Box(5) == Box(5).map(x => x)
 
 # Composition law
 
-Composition law states that if we have a value inside a functor context, we map it to a function f, then we map the new value and context to a function g, that it should be completely identical to mapping the value to a composed g ∙ f function.
+Composition law states that if we have a value inside a functor context, we map it to a function f, then we map the new value and context to a function g, that it should be completely identical to mapping the value to a composed g ∙ f function (function that first calls _f_ on the argument, and sends the return value into f).
 
 ```
+const compose = (g, f) => x => g(f(x))
 Box(5).map(f).map(g) == Box(5).map(compose(g, f))
 ```
 
 # Test all the laws
 
-How do we test these laws? By using something called property testing. In essence, property testing means generating a bunch of values, testing if a certain proposition/law works for them (like the laws we mentioned up).
+How do we test these laws? By using something called property testing. In essence, property testing means generating a bunch of values, testing if a certain proposition/law works for them (like the _identity_ or _composition_ laws we mentioned up; other laws from Math can be tested, like _commutativity_, _distributivity_, _associativity_ etc).
 
 jsVerify is one of the libraries used for writing property tests in javascript.
 
@@ -205,7 +209,7 @@ describe("Box", () => {
 });
 ```
 
-To run this example
+To run these tests, run `npm test -- 02.jsverify.js` in the terminal.
 
 These property tests will generate 100 cases with random values defined in the property (_nat_ means a natural number, _string_ string, _nat -> nat_ a function which accepts a nat and returns a nat etc.)
 
@@ -229,11 +233,11 @@ How can we implement a structure like that?
 
 A small detour.
 
-What is an algebra?
+## What is an algebra?
 
 An algebra is a set of elements together with a set of operations. For example, addition on integers forms a very simple algebra, where the elements are integers, and the sole operation is addition. But an algebra also follows some laws (addition being commutative and associative).
 
-What are ADTs?
+## What are ADTs?
 
 ADTs are types composed from _product_ types and _sum_ types. The reason why they're called algebraic is that when looking at the _cardinalities_ of these types, they form a certain algebra (therefore _sum_ and _product_).
 
@@ -270,11 +274,11 @@ string | string? We need to somehow put a _tag_ on each variant, so that we actu
 ## Pattern matching
 
 Pattern matching is a language construct (in some languages) or a function which gives us an opportunity to execute different code depending on what a certain type is (what kind of value, or variant or inner type etc).
-Javascript doesn't have pattern matching, only simple switch case statements.
+Javascript doesn't have pattern matching, only simple switch/case statements.
 
 # daggy
 
-Daggy.js is a library in javascript for writing _product_ and _sum_ types in a bit easier way, since javascript doesn't support types and doesn't have any typechecking, typechecking in daggy is done at runtime.
+Daggy.js is a library in javascript for writing _product_ and _sum_ types in a bit easier way, since javascript doesn't support types and doesn't have any typechecking - typechecking in daggy is done at runtime.
 
 ```js
 const { tagged } = require("daggy");
@@ -361,7 +365,7 @@ const makePerson = (name, age) => ({
   age
 });
 
-const newPerson = makePerson("", -20); // this allows for a pretty perfect person, when it comes to the code
+const newPerson = makePerson("", -20); // this goes for a pretty perfect person, when it comes to the code
 ```
 
 ```js
@@ -525,7 +529,7 @@ Maybe.prototype.fold = function(f, g) {
 };
 ```
 
-This way, if we need the result, we are providing two functions, one for the lack of value, and one for possible existence of it.
+This way, if we need the result, we are providing two functions, one for the value, and one for lack of it.
 
 ```js
 const result = maybeStreet.fold(
@@ -586,7 +590,7 @@ How can we emulate a similar thing in javascript?
 
 The simplest way to avoid running a side-effectful procedure is - to wrap it in a function!
 
-Enter ... IO.
+Enter ... _IO_.
 
 # IO
 
@@ -600,11 +604,11 @@ IO is a functor, it implements map. But how do we get a value which is calculate
 
 ```js
 IO.prototype.map = function(f) {
-  return IO((...args) => t(this.run(...args)));
+  return IO(() => t(this.run()));
 };
 ```
 
-IO is a monad, it implements chain.
+IO is a monad, it implements _chain_.
 
 ```js
 IO.prototype.chain = function(f) {
@@ -612,7 +616,7 @@ IO.prototype.chain = function(f) {
 };
 ```
 
-and of.
+and _of_.
 
 ```js
 IO.of = x => IO(() => x);
