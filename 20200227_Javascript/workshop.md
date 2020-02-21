@@ -25,7 +25,7 @@ const getAcronym = str => {
   return uppercased.join("");
 };
 
-const result = getAcronym("Comp Lang Kicks A**");
+const result = getAcronym("Comp Lang Rules");
 ```
 
 This program is highly imperative - and if we squint a bit we can see that there's a logical sequence of steps, trimming a string, splitting it by a space, getting every letter from every word, uppercasing them and then joining them in the end. And all the time we're adding temporary variables and local state just to somehow give a name to the step we're working on. This is pretty noisy.
