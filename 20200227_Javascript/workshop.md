@@ -830,3 +830,8 @@ This way, we make monad transformer stacks where every layer will add a new spri
 2. EitherT - Adds the functionality of error
 3. StateT - Adds the functionality of state
 4. ReaderT - Adds the functionality of shared environment
+
+# Exercises
+
+[Exercises 1](https://next.plnkr.co/edit/eXeSaN1vfYhBhOx6?open=index.js&deferRun=1 "Exercises 1")
+[Exercises 2](https://next.plnkr.co/edit/z0yLHE94wnPbyphS?open=index.js&deferRun=1 "Exercises 2")

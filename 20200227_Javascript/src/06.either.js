@@ -18,7 +18,7 @@ Either.prototype[util.inspect.custom] = function() {
 Either.prototype.map = function(f) {
   return this.cata({
     Left: _ => this,
-    Right: val => Either.Right(val)
+    Right: val => Either.Right(f(val))
   });
 };
 
@@ -26,6 +26,13 @@ Either.prototype.chain = function(f) {
   return this.cata({
     Left: _ => this,
     Right: val => f(val)
+  });
+};
+
+Either.prototype.fold = function(f, g) {
+  return this.cata({
+    Left: f,
+    Right: g
   });
 };
 
